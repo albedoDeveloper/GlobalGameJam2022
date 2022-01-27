@@ -1,1 +1,1 @@
-# GlobalGameJam2022
+# Global Game Jam2022
