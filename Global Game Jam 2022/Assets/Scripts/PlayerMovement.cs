@@ -10,6 +10,9 @@ public class PlayerMovement : NetworkBehaviour
     public Vector2 targetVelocity;
     public GameObject playerGun;
 
+
+    Vector3 mousePosition;
+
     //should encapsulate
     public float playerAccel;
     public float playerMaxSpeed;
@@ -58,24 +61,29 @@ public class PlayerMovement : NetworkBehaviour
         }
     }
 
-    private void Rotate()
+    void Rotate()
     {
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Camera.main.ResetWorldToCameraMatrix();
+        //find mouse pos
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //Vector3 mousePosition = Camera.main.WorldToScreenPoint(Input.mousePosition);
+        //Vector3 mousePosition = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+        //Vector3 mousePosition = Camera.main.WorldToViewportPoint(Input.mousePosition);
+        //Vector3 mousePosition = Camera.main.ViewportToWorldPoint(Input.mousePosition);
 
-        Quaternion targetRot = Quaternion.Euler(mousePos - this.gameObject.transform.position);
-        float targetAngle = Vector2.Angle(mousePos, this.gameObject.transform.position);
-        Debug.Log("mouse X = " + mousePos.x + "mouse Y = " + mousePos.y + "target angle ==" + targetAngle);
+        mousePosition.z = 0;
 
-        playerGun.transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRot, Time.deltaTime);
-
+        Debug.DrawLine(transform.position, mousePosition, Color.red);
+        Debug.Log("MouseX = " + mousePosition.x + " MouseY = " + mousePosition.y);
 
 
 
+        //rotate
+        Vector3 gunPos = playerGun.transform.position;
+        gunPos.z = 0;
 
-    }
+        Quaternion targetRot = Quaternion.Euler(mousePosition - gunPos);
 
-    private Vector3 FindMousePosition()
-    {
-        return Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        playerGun.transform.right = Vector3.Lerp(playerGun.transform.right, mousePosition - transform.position, Time.deltaTime);
     }
 }
