@@ -86,11 +86,15 @@ public class PlayerMovement : NetworkBehaviour
         playerGun.transform.right = Vector3.Lerp(playerGun.transform.right, mousePosition - transform.position, Time.deltaTime);
     }
 
-    public override void OnStartClient()
+    private void Start()
     {
         if (!isClientOnly && hasAuthority)
         {
-            RpcTurnGunOff();
+            playerGun.SetActive(false);
+        }
+        else if (isClientOnly && !hasAuthority)
+        {
+            playerGun.SetActive(false);
         }
     }
 
