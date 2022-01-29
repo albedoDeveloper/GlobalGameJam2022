@@ -68,10 +68,12 @@ public class PlayerMovement : NetworkBehaviour
     private void Rotate()
     {
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePos.z = 0;
 
         Quaternion targetRot = Quaternion.Euler(mousePos - this.gameObject.transform.position);
         float targetAngle = Vector2.Angle(mousePos, this.gameObject.transform.position);
         Debug.Log("mouse X = " + mousePos.x + "mouse Y = " + mousePos.y + "target angle ==" + targetAngle);
+        Debug.DrawLine(this.gameObject.transform.position, mousePos, Color.red);
 
         playerGun.transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRot, Time.deltaTime);
 
