@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class PlayerSetup : NetworkManager
+public class PlayerSetup : NetworkBehaviour
 {
 
-  //  public static List<PlayerSetup> ActivePlayers = new List<PlayerSetup>();
+   public List<GameObject> ActivePlayers = new List<GameObject>();
   //  int activePlayersSize = 0;
 
     // Start is called before the first frame update
@@ -14,13 +14,14 @@ public class PlayerSetup : NetworkManager
     {
     }
 
+
     public override void OnStartClient()
     {
-        if (isClientOnly)
-        {
-            GetComponent<Renderer>().material.color = new Color(0, 255, 0);
-            CmdSetCharacters(this.gameObject);
+        if (isClientOnly) {
+            CmdSetCharacters();
+
         }
+
     }
 
     // Update is called once per frame
@@ -39,10 +40,19 @@ public class PlayerSetup : NetworkManager
     }
 
     [Command(requiresAuthority = false)]
-    public void CmdSetCharacters(GameObject thisgameobject)
+    public void CmdSetCharacters()
     {
-       //if(isServer)
-       // thisgameobject.GetComponent<Renderer>().material.color = new Color(0, 255, 0);
+        var a = Instantiate(ActivePlayers[0]);
+
+        a.GetComponent<PlayerMovement>().rb = a.GetComponent<Rigidbody2D>();
+
+        var b = Instantiate(ActivePlayers[1]);
+
+        b.GetComponent<PlayerMovement1>().rb = b.GetComponent<Rigidbody2D>();
+
+        NetworkServer.Spawn(a);
+        
+        NetworkServer.Spawn(b);
     }
 
 

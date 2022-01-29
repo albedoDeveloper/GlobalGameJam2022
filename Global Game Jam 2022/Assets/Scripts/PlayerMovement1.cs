@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class PlayerMovement : NetworkBehaviour
+public class PlayerMovement1 : NetworkBehaviour
 {
     public Rigidbody2D rb;
-
+    [SyncVar]
     public Vector2 targetVelocity;
     public GameObject playerGun;
 
@@ -27,23 +27,21 @@ public class PlayerMovement : NetworkBehaviour
         if (!isLocalPlayer)
             return;
         rb = this.GetComponent<Rigidbody2D>();
-
-
         Camera.main.GetComponent<CameraStart>().SetChild(gameObject);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!isClientOnly)
+        if (isClientOnly)
         {
             Rotate();
-
-            KeyPress();
+            CmdKeyPress();
         }
     }
 
-    private void KeyPress()
+   
+    private void CmdKeyPress()
     {
         targetVelocity.y = (Input.GetAxis("Vertical"));
         targetVelocity.x = (Input.GetAxis("Horizontal"));
