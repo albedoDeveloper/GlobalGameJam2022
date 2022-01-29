@@ -70,15 +70,22 @@ public class PlayerMovement : NetworkBehaviour
 
     void Rotate()
     {
-        //Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //Vector2 mousePosition = Camera.main.WorldToScreenPoint(Input.mousePosition);
-        Vector3 mousePosition = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+        Camera.main.ResetWorldToCameraMatrix();
+        //find mouse pos
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //Vector3 mousePosition = Camera.main.WorldToScreenPoint(Input.mousePosition);
+        //Vector3 mousePosition = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+        //Vector3 mousePosition = Camera.main.WorldToViewportPoint(Input.mousePosition);
+        //Vector3 mousePosition = Camera.main.ViewportToWorldPoint(Input.mousePosition);
+
         mousePosition.z = 0;
 
         Debug.DrawLine(transform.position, mousePosition, Color.red);
         Debug.Log("MouseX = " + mousePosition.x + " MouseY = " + mousePosition.y);
 
 
+
+        //rotate
         Vector3 gunPos = playerGun.transform.position;
         gunPos.z = 0;
 
