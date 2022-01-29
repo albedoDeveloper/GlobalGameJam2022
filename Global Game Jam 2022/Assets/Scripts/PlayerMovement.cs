@@ -88,9 +88,8 @@ public class PlayerMovement : NetworkBehaviour
 
     private void Start()
     {
-        if (isClientOnly)
+        if (hasAuthority)
         {
-            GetComponent<NetworkTransform>().clientAuthority = true;
             playerGun.SetActive(false);
         }
     }
