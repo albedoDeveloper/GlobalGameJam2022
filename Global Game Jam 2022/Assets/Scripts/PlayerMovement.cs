@@ -54,6 +54,11 @@ public class PlayerMovement : NetworkBehaviour
         targetVelocity.x = (Input.GetAxis("Horizontal"));
 
         Move();
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Fire();
+        }
     }
 
     private void Move()
@@ -72,16 +77,12 @@ public class PlayerMovement : NetworkBehaviour
     {
         Camera.main.ResetWorldToCameraMatrix();
         //find mouse pos
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //Vector3 mousePosition = Camera.main.WorldToScreenPoint(Input.mousePosition);
-        //Vector3 mousePosition = Camera.main.ScreenToViewportPoint(Input.mousePosition);
-        //Vector3 mousePosition = Camera.main.WorldToViewportPoint(Input.mousePosition);
-        //Vector3 mousePosition = Camera.main.ViewportToWorldPoint(Input.mousePosition);
+        mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         mousePosition.z = 0;
 
         Debug.DrawLine(transform.position, mousePosition, Color.red);
-        Debug.Log("MouseX = " + mousePosition.x + " MouseY = " + mousePosition.y);
+        //Debug.Log("MouseX = " + mousePosition.x + " MouseY = " + mousePosition.y);
 
 
 
@@ -92,5 +93,10 @@ public class PlayerMovement : NetworkBehaviour
         Quaternion targetRot = Quaternion.Euler(mousePosition - gunPos);
 
         playerGun.transform.right = Vector3.Lerp(playerGun.transform.right, mousePosition - transform.position, Time.deltaTime);
+    }
+
+    void Fire()
+    {
+        Debug.Log("Fire");
     }
 }
