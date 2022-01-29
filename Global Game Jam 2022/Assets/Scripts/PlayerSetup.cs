@@ -52,7 +52,7 @@ public class PlayerSetup : NetworkBehaviour
 
         NetworkServer.Spawn(a);
         
-        NetworkServer.Spawn(b);
+        NetworkServer.Spawn(b, connectionToClient);
     }
 
 
