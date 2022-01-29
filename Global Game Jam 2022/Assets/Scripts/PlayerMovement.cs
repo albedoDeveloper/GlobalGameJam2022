@@ -9,6 +9,8 @@ public class PlayerMovement : NetworkBehaviour
 
     public Vector2 targetVelocity;
     public GameObject playerGun;
+    public Transform firePoint;
+    public GameObject bulletPrefab;
 
 
     Vector3 mousePosition;
@@ -28,7 +30,7 @@ public class PlayerMovement : NetworkBehaviour
 
         if (!isLocalPlayer)
             return;
-        Camera.main.GetComponent<CameraStart>().SetChild(gameObject);
+        //Camera.main.GetComponent<CameraStart>().SetChild(gameObject);
 
         if (isServer)
         {
@@ -98,5 +100,9 @@ public class PlayerMovement : NetworkBehaviour
     void Fire()
     {
         Debug.Log("Fire");
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        Projectile projectile = bullet.GetComponent<Projectile>();
+        //projectile.firePoint = firePoint;
+
     }
 }
