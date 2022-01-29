@@ -847,7 +847,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneId: 2140252654
   serverOnly: 0
-  visible: 2
+  visible: 0
   m_AssetId: 
   hasSpawned: 0
 --- !u!114 &2007233078
@@ -876,7 +876,7 @@ MonoBehaviour:
   bufferSizeLimit: 64
   catchupThreshold: 4
   catchupMultiplier: 0.1
-  onlySyncOnChange: 1
+  onlySyncOnChange: 0
   bufferResetMultiplier: 5
   positionSensitivity: 0.01
   rotationSensitivity: 0.01
