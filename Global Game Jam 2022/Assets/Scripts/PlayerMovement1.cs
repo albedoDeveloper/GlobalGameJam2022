@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class PlayerMovement : NetworkBehaviour
+public class PlayerMovement1 : NetworkBehaviour
 {
-    Rigidbody2D rb;
-
+    public Rigidbody2D rb;
+    [SyncVar]
     public Vector2 targetVelocity;
     public GameObject playerGun;
-    public Transform firePoint;
-    public GameObject bulletPrefab;
 
 
     Vector3 mousePosition;
@@ -19,55 +17,35 @@ public class PlayerMovement : NetworkBehaviour
     public float playerAccel;
     public float playerMaxSpeed;
 
-    public Sprite dog;
-    public Sprite cat;
 
 
 
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
-        if (!isClientOnly && hasAuthority)
-        {
-            GetComponent<SpriteRenderer>().sprite = dog;
-        }
-        
-                else if (!isClientOnly && !hasAuthority)
-                {
-                    GetComponent<SpriteRenderer>().sprite = cat;
-                }
-                else if (isClientOnly && hasAuthority)
-                {
-                    GetComponent<SpriteRenderer>().sprite = cat;
-                }
-                else if (isClientOnly && !hasAuthority)
-                {
-                    GetComponent<SpriteRenderer>().sprite = dog;
-                }
+        if (!isLocalPlayer)
+            return;
+        rb = this.GetComponent<Rigidbody2D>();
+        Camera.main.GetComponent<CameraStart>().SetChild(gameObject);
     }
 
     // Update is called once per frame
     void Update()
     {
-        Rotate();
-
-        KeyPress();
-
+        if (isClientOnly)
+        {
+            Rotate();
+            CmdKeyPress();
+        }
     }
 
-    private void KeyPress()
+    private void CmdKeyPress()
     {
         targetVelocity.y = (Input.GetAxis("Vertical"));
         targetVelocity.x = (Input.GetAxis("Horizontal"));
 
         Move();
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            Fire();
-        }
     }
 
     private void Move()
@@ -86,12 +64,16 @@ public class PlayerMovement : NetworkBehaviour
     {
         Camera.main.ResetWorldToCameraMatrix();
         //find mouse pos
-        mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //Vector3 mousePosition = Camera.main.WorldToScreenPoint(Input.mousePosition);
+        //Vector3 mousePosition = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+        //Vector3 mousePosition = Camera.main.WorldToViewportPoint(Input.mousePosition);
+        //Vector3 mousePosition = Camera.main.ViewportToWorldPoint(Input.mousePosition);
 
         mousePosition.z = 0;
 
         Debug.DrawLine(transform.position, mousePosition, Color.red);
-        //Debug.Log("MouseX = " + mousePosition.x + " MouseY = " + mousePosition.y);
+       // Debug.Log("MouseX = " + mousePosition.x + " MouseY = " + mousePosition.y);
 
 
 
@@ -104,12 +86,14 @@ public class PlayerMovement : NetworkBehaviour
         playerGun.transform.right = Vector3.Lerp(playerGun.transform.right, mousePosition - transform.position, Time.deltaTime);
     }
 
-    void Fire()
+    private void Start()
     {
-        Debug.Log("Fire");
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-        Projectile projectile = bullet.GetComponent<Projectile>();
-        //projectile.firePoint = firePoint;
+
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdGetPlayerCharacter()
+    {
 
     }
 }
