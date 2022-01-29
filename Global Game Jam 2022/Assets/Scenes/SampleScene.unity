@@ -833,7 +833,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1580211227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -996,9 +996,7 @@ MonoBehaviour:
   networkAddress: localhost
   maxConnections: 100
   authenticator: {fileID: 0}
-  playerPrefab: {fileID: 3558057465114467324, guid: 5ae9985a496fba648b1efcf4400854af, type: 3}
+  playerPrefab: {fileID: 6342945595457360419, guid: ce45be1b29f6e074c8b80cee7f397199, type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 0
-  spawnPrefabs:
-  - {fileID: 6342945595457360419, guid: 0675cc6c1b54e15439ee12f3cc819092, type: 3}
-  - {fileID: 6342945595457360419, guid: ce45be1b29f6e074c8b80cee7f397199, type: 3}
+  spawnPrefabs: []

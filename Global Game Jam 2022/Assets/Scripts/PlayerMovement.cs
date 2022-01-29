@@ -17,10 +17,6 @@ public class PlayerMovement : NetworkBehaviour
     public float playerAccel;
     public float playerMaxSpeed;
 
-
-
-
-
     // Start is called before the first frame update
     void Awake()
     {
@@ -87,5 +83,13 @@ public class PlayerMovement : NetworkBehaviour
         Quaternion targetRot = Quaternion.Euler(mousePosition - gunPos);
 
         playerGun.transform.right = Vector3.Lerp(playerGun.transform.right, mousePosition - transform.position, Time.deltaTime);
+    }
+
+    private void Start()
+    {
+        if (isClientOnly)
+        {
+            playerGun.SetActive(false);
+        }
     }
 }

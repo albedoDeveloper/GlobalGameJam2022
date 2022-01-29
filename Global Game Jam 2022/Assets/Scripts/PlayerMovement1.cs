@@ -85,4 +85,15 @@ public class PlayerMovement1 : NetworkBehaviour
 
         playerGun.transform.right = Vector3.Lerp(playerGun.transform.right, mousePosition - transform.position, Time.deltaTime);
     }
+
+    private void Start()
+    {
+
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdGetPlayerCharacter()
+    {
+
+    }
 }

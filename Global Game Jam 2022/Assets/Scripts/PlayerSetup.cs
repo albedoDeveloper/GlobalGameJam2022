@@ -51,8 +51,8 @@ public class PlayerSetup : NetworkBehaviour
         b.GetComponent<PlayerMovement1>().rb = b.GetComponent<Rigidbody2D>();
 
         NetworkServer.Spawn(a);
-        
-        NetworkServer.Spawn(b, connectionToClient);
+
+        NetworkServer.Spawn(b);
     }
 
 
