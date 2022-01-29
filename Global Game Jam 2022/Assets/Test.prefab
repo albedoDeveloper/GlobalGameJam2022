@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 7811499169736975057}
   - component: {fileID: 9018777464532164488}
   - component: {fileID: 2724751964772292088}
+  - component: {fileID: 6668144893382520916}
   m_Layer: 0
   m_Name: Test
   m_TagString: Untagged
@@ -171,8 +172,27 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5669828972264872115}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3e2f830c723bbbf4faae3534a45a1263, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+--- !u!114 &6668144893382520916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5669828972264872115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ada06f04026d4b84bad266299fa7007a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  targetVelocity: {x: 0, y: 0}
+  playerAccel: 5
+  playerMaxSpeed: 10
