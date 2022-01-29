@@ -15,5 +15,7 @@ public class Movement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.A))
             gameObject.transform.Translate(new Vector3(0.1f, 0, 0));
+        if(Input.GetKeyDown(KeyCode.B))
+
     }
 }
