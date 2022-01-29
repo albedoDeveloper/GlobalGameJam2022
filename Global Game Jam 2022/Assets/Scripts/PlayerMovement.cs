@@ -19,6 +19,8 @@ public class PlayerMovement : NetworkBehaviour
     public float playerAccel;
     public float playerMaxSpeed;
 
+    public Sprite dog;
+    public Sprite cat;
 
 
 
@@ -27,18 +29,23 @@ public class PlayerMovement : NetworkBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-
-        if (!isLocalPlayer)
-            return;
-        //Camera.main.GetComponent<CameraStart>().SetChild(gameObject);
-
-        if (isServer)
+        if (!isClientOnly && hasAuthority)
         {
-            GetComponent<Renderer>().material.color = new Color(0, 255, 0);
+            GetComponent<SpriteRenderer>().sprite = dog;
         }
-
-        else if (isClientOnly)
-            GetComponent<Renderer>().material.color = new Color(0, 0, 0);
+        
+                else if (!isClientOnly && !hasAuthority)
+                {
+                    GetComponent<SpriteRenderer>().sprite = cat;
+                }
+                else if (isClientOnly && hasAuthority)
+                {
+                    GetComponent<SpriteRenderer>().sprite = cat;
+                }
+                else if (isClientOnly && !hasAuthority)
+                {
+                    GetComponent<SpriteRenderer>().sprite = dog;
+                }
     }
 
     // Update is called once per frame

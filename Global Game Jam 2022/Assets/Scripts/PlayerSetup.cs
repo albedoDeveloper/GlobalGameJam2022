@@ -42,7 +42,7 @@ public class PlayerSetup : NetworkBehaviour
     [Command(requiresAuthority = false)]
     public void CmdSetCharacters()
     {
-        var a = Instantiate(ActivePlayers[0]);
+      /*  var a = Instantiate(ActivePlayers[0]);
 
         a.GetComponent<PlayerMovement>().rb = a.GetComponent<Rigidbody2D>();
 
@@ -52,7 +52,7 @@ public class PlayerSetup : NetworkBehaviour
 
         NetworkServer.Spawn(a);
 
-        NetworkServer.Spawn(b);
+        NetworkServer.Spawn(b);*/
     }
 
 
