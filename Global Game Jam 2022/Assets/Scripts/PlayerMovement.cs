@@ -90,7 +90,13 @@ public class PlayerMovement : NetworkBehaviour
     {
         if (!isClientOnly && hasAuthority)
         {
-            playerGun.SetActive(false);
+            RpcTurnGunOff();
         }
+    }
+
+    [ClientRpc]
+    public void RpcTurnGunOff()
+    {
+        playerGun.SetActive(false);
     }
 }
