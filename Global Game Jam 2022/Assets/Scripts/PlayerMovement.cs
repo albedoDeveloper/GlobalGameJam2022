@@ -8,7 +8,7 @@ public class PlayerMovement : NetworkBehaviour
     Rigidbody2D rb;
 
     public Vector2 targetVelocity;
-    //public GameObject playerGun;
+    public GameObject playerGun;
 
     //should encapsulate
     public float playerAccel;
@@ -39,8 +39,9 @@ public class PlayerMovement : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
+        Rotate();
+
         KeyPress();
-        //Rotate();
 
     }
 
@@ -66,13 +67,13 @@ public class PlayerMovement : NetworkBehaviour
 
     private void Rotate()
     {
-        Vector3 mousePos = FindMousePosition();
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        //Quaternion targetRot = Quaternion.Euler(mousePos - this.gameObject.transform.position);
+        Quaternion targetRot = Quaternion.Euler(mousePos - this.gameObject.transform.position);
         float targetAngle = Vector2.Angle(mousePos, this.gameObject.transform.position);
-        Debug.Log("target angle ==" + targetAngle);
+        Debug.Log("mouse X = " + mousePos.x + "mouse Y = " + mousePos.y + "target angle ==" + targetAngle);
 
-        //playerGun.transform.rotation = Quaternion.Euler(0, 0, targetAngle);
+        playerGun.transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRot, Time.deltaTime);
 
 
 
@@ -83,8 +84,5 @@ public class PlayerMovement : NetworkBehaviour
     private Vector3 FindMousePosition()
     {
         return Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-
-
     }
 }
