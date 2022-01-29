@@ -13,7 +13,6 @@ public class PlayerMovement : NetworkBehaviour
     public Sprite dog;
     public Sprite cat;
 
-
     Vector3 mousePosition;
 
     //should encapsulate
@@ -93,11 +92,11 @@ public class PlayerMovement : NetworkBehaviour
     {
         if (!isClientOnly && hasAuthority)
         {
-            //GetComponent<SpriteRenderer>().sprite = 
+            GetComponent<SpriteRenderer>().sprite = dog;
         }
         else if (isClientOnly && !hasAuthority)
         {
-            
+            GetComponent<SpriteRenderer>().sprite = cat;
         }
     }
 
