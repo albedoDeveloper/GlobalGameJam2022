@@ -38,7 +38,7 @@ public class Projectile : MonoBehaviour
     {
         if (collision.gameObject.layer != LayerMask.NameToLayer("Player") || collision.gameObject.layer != LayerMask.NameToLayer("Projectile"))
         {
-            Debug.Log("I have collided with " + collision.transform.gameObject.name);
+            //Debug.Log("I have collided with " + collision.transform.gameObject.name);
             SelfDestruct();
         }
 
@@ -49,7 +49,7 @@ public class Projectile : MonoBehaviour
         rb.velocity = rb.velocity * 0;
         GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         Animator anim = explosion.GetComponent<Animator>();
-        anim.Play("Explosion");
+        anim.Play("Explosion2");
         Destroy(explosion, .30f);
         Destroy(this.gameObject);
 
