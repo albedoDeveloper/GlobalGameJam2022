@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionPrefab: {fileID: 3146087713216463276, guid: 9a04e88ab20cd93499196735a210b9bc, type: 3}
-  bulletForce: 20
+  bulletForce: 40
   firePoint: {fileID: 0}
   anim: {fileID: 0}
 --- !u!61 &7713502037016787433
