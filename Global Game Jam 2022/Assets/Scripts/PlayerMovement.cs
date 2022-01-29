@@ -31,12 +31,13 @@ public class PlayerMovement : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isClientOnly)
-        {
-            Rotate();
+        if (!isLocalPlayer)
+            return;
+       
+        Rotate();
 
-            KeyPress();
-        }
+        KeyPress();
+        
     }
 
     private void KeyPress()
