@@ -238,7 +238,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  rb: {fileID: 0}
+  rb: {fileID: 7200859944384031657}
   targetVelocity: {x: 0, y: 0}
   playerGun: {fileID: 6342945595169549065}
   playerAccel: 3
