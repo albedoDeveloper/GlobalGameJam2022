@@ -10,17 +10,7 @@ public class Movement : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (!isLocalPlayer)
-            return;
-        Camera.main.GetComponent<CameraStart>().SetChild(gameObject);
-        
-        if (isServer)
-        {
-            GetComponent<Renderer>().material.color = new Color(0, 255, 0);
-        }
 
-        else if (isClientOnly)
-             GetComponent<Renderer>().material.color = new Color(0, 0, 0);
     }
 
     // Update is called once per frame
