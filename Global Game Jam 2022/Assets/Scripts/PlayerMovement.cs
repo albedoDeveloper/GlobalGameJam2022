@@ -86,7 +86,7 @@ public class PlayerMovement : NetworkBehaviour
         playerGun.transform.right = Vector3.Lerp(playerGun.transform.right, mousePosition - transform.position, Time.deltaTime);
     }
 
-    private void Start()
+    public override void OnStartClient()
     {
         if (!isClientOnly && hasAuthority)
         {
