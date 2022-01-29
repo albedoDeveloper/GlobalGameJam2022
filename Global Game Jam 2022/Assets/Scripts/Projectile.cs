@@ -35,7 +35,7 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.layer != LayerMask.NameToLayer("Player"))
+        if (collision.gameObject.layer != LayerMask.NameToLayer("Player") || collision.gameObject.layer != LayerMask.NameToLayer("Bullet"))
         {
             //Debug.Log("I have collided with " + collision.transform.gameObject.name);
             SelfDestruct();
