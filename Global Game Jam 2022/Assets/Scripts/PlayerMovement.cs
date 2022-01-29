@@ -88,7 +88,7 @@ public class PlayerMovement : NetworkBehaviour
 
     private void Start()
     {
-        if (hasAuthority)
+        if (!isClientOnly && hasAuthority)
         {
             playerGun.SetActive(false);
         }
