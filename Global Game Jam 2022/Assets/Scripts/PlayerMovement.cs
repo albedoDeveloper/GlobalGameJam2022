@@ -21,19 +21,12 @@ public class PlayerMovement : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-
         if (!isLocalPlayer)
             return;
+        rb = GetComponent<Rigidbody2D>();
+
+
         Camera.main.GetComponent<CameraStart>().SetChild(gameObject);
-
-        if (isServer)
-        {
-            GetComponent<Renderer>().material.color = new Color(0, 255, 0);
-        }
-
-        else if (isClientOnly)
-            GetComponent<Renderer>().material.color = new Color(0, 0, 0);
     }
 
     // Update is called once per frame
