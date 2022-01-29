@@ -40,7 +40,6 @@ public class PlayerMovement1 : NetworkBehaviour
         }
     }
 
-   
     private void CmdKeyPress()
     {
         targetVelocity.y = (Input.GetAxis("Vertical"));
