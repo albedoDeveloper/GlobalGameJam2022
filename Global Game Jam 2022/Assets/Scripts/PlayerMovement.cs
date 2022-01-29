@@ -94,9 +94,17 @@ public class PlayerMovement : NetworkBehaviour
         {
             GetComponent<SpriteRenderer>().sprite = dog;
         }
-        else if (isClientOnly && !hasAuthority)
+        else if (!isClientOnly && !hasAuthority)
         {
             GetComponent<SpriteRenderer>().sprite = cat;
+        }
+        else if (isClientOnly && hasAuthority)
+        {
+            GetComponent<SpriteRenderer>().sprite = cat;
+        }
+        else if (isClientOnly && !hasAuthority)
+        {
+            GetComponent<SpriteRenderer>().sprite = dog;
         }
     }
 
