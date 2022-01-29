@@ -241,6 +241,8 @@ MonoBehaviour:
   rb: {fileID: 7200859944384031657}
   targetVelocity: {x: 0, y: 0}
   playerGun: {fileID: 6342945595169549065}
+  dog: {fileID: 988077249, guid: 77657ea3712207648938fc61e5d30dc2, type: 3}
+  cat: {fileID: -1668987857, guid: 77657ea3712207648938fc61e5d30dc2, type: 3}
   playerAccel: 3
   playerMaxSpeed: 10
 --- !u!114 &6342945595457360426

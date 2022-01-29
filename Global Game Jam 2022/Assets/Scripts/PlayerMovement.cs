@@ -10,6 +10,9 @@ public class PlayerMovement : NetworkBehaviour
     public Vector2 targetVelocity;
     public GameObject playerGun;
 
+    public Sprite dog;
+    public Sprite cat;
+
 
     Vector3 mousePosition;
 
@@ -90,11 +93,11 @@ public class PlayerMovement : NetworkBehaviour
     {
         if (!isClientOnly && hasAuthority)
         {
-            playerGun.SetActive(false);
+            //GetComponent<SpriteRenderer>().sprite = 
         }
         else if (isClientOnly && !hasAuthority)
         {
-            playerGun.SetActive(false);
+            
         }
     }
 
