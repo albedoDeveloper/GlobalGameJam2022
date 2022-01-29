@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : NetworkBehaviour
 {
     Rigidbody2D rb;
 
     public Vector2 targetVelocity;
-    public GameObject playerGun;
+    //public GameObject playerGun;
 
     //should encapsulate
     public float playerAccel;
@@ -21,13 +22,25 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        if (!isLocalPlayer)
+            return;
+        Camera.main.GetComponent<CameraStart>().SetChild(gameObject);
+
+        if (isServer)
+        {
+            GetComponent<Renderer>().material.color = new Color(0, 255, 0);
+        }
+
+        else if (isClientOnly)
+            GetComponent<Renderer>().material.color = new Color(0, 0, 0);
     }
 
     // Update is called once per frame
     void Update()
     {
         KeyPress();
-        Rotate();
+        //Rotate();
 
     }
 
@@ -59,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
         float targetAngle = Vector2.Angle(mousePos, this.gameObject.transform.position);
         Debug.Log("target angle ==" + targetAngle);
 
-        playerGun.transform.rotation = Quaternion.Euler(0, 0, targetAngle);
+        //playerGun.transform.rotation = Quaternion.Euler(0, 0, targetAngle);
 
 
 
