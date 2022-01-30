@@ -101,9 +101,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTarget: {fileID: 0}
-  detectionRadius: 15
+  detectionRadius: 25
   enemySpeed: 2.5
-  health: 5
+  health: 3
   parentSpawner: {fileID: 0}
 --- !u!50 &1111201601
 Rigidbody2D:

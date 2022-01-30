@@ -5,7 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/RobsTestScene.unity
     guid: be6ca5fe8dea7b846a69ea4c70f64ddb
+  - enabled: 1
+    path: Assets/Scenes/Overworld Testing 1.unity
+    guid: b19628710f96b2447b352c8d413f2375
   m_configObjects: {}
