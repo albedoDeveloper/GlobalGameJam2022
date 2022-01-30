@@ -17,7 +17,7 @@ public class BuildController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-
+            GameObject obj = Instantiate(_lightPrefab);
         }
     }
 }
