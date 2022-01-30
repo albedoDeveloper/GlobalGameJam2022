@@ -18,14 +18,13 @@ public class Projectile : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animation>();
         Travel();
-        //Physics.IgnoreLayerCollision(6, 7, true);
-
 
     }
 
     // Update is called once per frame
     void Update()
     {
+
     }
 
     public void Travel()
@@ -36,7 +35,7 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.layer != LayerMask.NameToLayer("Player") || collision.gameObject.layer != LayerMask.NameToLayer("Projectile"))
+        if (collision.gameObject.layer != LayerMask.NameToLayer("Player") || collision.gameObject.layer != LayerMask.NameToLayer("Bullet"))
         {
             //Debug.Log("I have collided with " + collision.transform.gameObject.name);
             SelfDestruct();
@@ -49,7 +48,8 @@ public class Projectile : MonoBehaviour
         rb.velocity = rb.velocity * 0;
         GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         Animator anim = explosion.GetComponent<Animator>();
-        anim.Play("Explosion2");
+        anim.Play("Explosion");
+        Debug.Log("Shoudl create xplosion prefab");
         Destroy(explosion, .30f);
         Destroy(this.gameObject);
 
