@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5407934170669532361}
   - component: {fileID: 1451494650}
   m_Layer: 0
-  m_Name: EnemySpawner
+  m_Name: EnemySpawnerBlue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 4
   m_Sprite: {fileID: -2135585597343286014, guid: 5aa8b770bc43046bc8d993d0d5b7f4a5, type: 3}
-  m_Color: {r: 0.764151, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0.14138377, b: 0.7647059, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8849bbe4355296b4fbc68ee2fb1d5578, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 8169049899402301453, guid: 9e9bac3c95755ae499df61cb5a78ad9f, type: 3}
+  enemyPrefab: {fileID: 8169049899402301453, guid: d394064c44e1ab54d9fc936452292355, type: 3}
   enemies: []
   maxEnemies: 6
   spawnInterval: 6
