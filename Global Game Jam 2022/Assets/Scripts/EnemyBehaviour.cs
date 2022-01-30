@@ -12,6 +12,8 @@ public class EnemyBehaviour : MonoBehaviour
 
     public float health = 5f;
 
+    public EnemySpawner parentSpawner;
+
     Rigidbody2D rb;
     List<Collider2D> hitColliders = new List<Collider2D>();
 
@@ -74,6 +76,10 @@ public class EnemyBehaviour : MonoBehaviour
 
     void SelfDestruct()
     {
+        if (parentSpawner != null)
+        {
+            parentSpawner.RemoveFromList(this);
+        }
         Destroy(this.gameObject, 0.25f);
     }
 }
