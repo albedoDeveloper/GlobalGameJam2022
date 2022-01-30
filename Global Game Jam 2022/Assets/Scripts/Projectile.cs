@@ -36,7 +36,7 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.layer != LayerMask.NameToLayer("Player") || collision.gameObject.layer != LayerMask.NameToLayer("Projectile"))
+        if ((collision.gameObject.layer != LayerMask.NameToLayer("Player") || collision.gameObject.layer != LayerMask.NameToLayer("Projectile")) && collision.gameObject.tag != "enemyblue")
         {
             //Debug.Log("I have collided with " + collision.transform.gameObject.name);
 
@@ -48,6 +48,9 @@ public class Projectile : MonoBehaviour
             SelfDestruct();
         }
 
+
+        else if (collision.gameObject.tag == "enemyblue")
+            SelfDestruct();
     }
 
     private void SelfDestruct()

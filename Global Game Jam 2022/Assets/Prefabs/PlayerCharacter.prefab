@@ -227,6 +227,7 @@ MonoBehaviour:
   playerGun: {fileID: 6342945595169549065}
   firePoint: {fileID: 511012931950584107}
   bulletPrefab: {fileID: 7713502037016787439, guid: c0e3fb7b0bc9ecd4bb063b783e10baa4, type: 3}
+  bulletPrefab2: {fileID: 7713502037016787439, guid: 830f4986a07bd1140bc967bacd1e0f16, type: 3}
   playerAccel: 25
   playerMaxSpeed: 30
   dog: {fileID: 1868135931, guid: ff5a5525086b05742bff3a0ad8b5d3ad, type: 3}
