@@ -39,6 +39,12 @@ public class Projectile : MonoBehaviour
         if (collision.gameObject.layer != LayerMask.NameToLayer("Player") || collision.gameObject.layer != LayerMask.NameToLayer("Projectile"))
         {
             //Debug.Log("I have collided with " + collision.transform.gameObject.name);
+
+            if (collision.gameObject.GetComponent<EnemyBehaviour>())
+            {
+                collision.gameObject.GetComponent<EnemyBehaviour>().TakeDamage();
+            }
+
             SelfDestruct();
         }
 
