@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BuildController : MonoBehaviour
 {
-    public GameObject _lightPrefab;
+    public GameObject _lightPlacer;
 
     // Start is called before the first frame update
     void Start()
@@ -17,7 +17,7 @@ public class BuildController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            GameObject obj = Instantiate(_lightPrefab);
+            GameObject obj = Instantiate(_lightPlacer);
         }
     }
 }
