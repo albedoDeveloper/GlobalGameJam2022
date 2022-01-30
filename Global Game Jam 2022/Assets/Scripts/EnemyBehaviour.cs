@@ -74,6 +74,18 @@ public class EnemyBehaviour : MonoBehaviour
         health--;
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            Debug.Log("Collision with plaeyr");
+            if (collision.gameObject.GetComponent<PlayerMovement>())
+            {
+                collision.gameObject.GetComponent<PlayerMovement>().TakeDamage(1);
+            }
+        }
+    }
+
     void SelfDestruct()
     {
         if (parentSpawner != null)

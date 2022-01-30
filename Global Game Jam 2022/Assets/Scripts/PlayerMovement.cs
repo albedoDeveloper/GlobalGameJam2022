@@ -14,6 +14,8 @@ public class PlayerMovement : NetworkBehaviour
     public GameObject bulletPrefab;
     public GameObject bulletPrefab2;
 
+    public int playerHealth = 20;
+
     Vector3 mousePosition;
 
     //should encapsulate
@@ -133,6 +135,11 @@ public class PlayerMovement : NetworkBehaviour
 
     }
 
+
+    public void TakeDamage(int dmg)
+    {
+        playerHealth -= dmg;
+    }
 
 
 }
