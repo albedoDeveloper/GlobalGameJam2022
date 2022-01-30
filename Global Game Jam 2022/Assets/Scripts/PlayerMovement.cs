@@ -23,7 +23,7 @@ public class PlayerMovement : NetworkBehaviour
     public Sprite dog;
     public Sprite cat;
 
-    
+
 
     // Start is called before the first frame update
     void Start()
@@ -127,6 +127,10 @@ public class PlayerMovement : NetworkBehaviour
         }
         //projectile.firePoint = firePoint;
         //rpcFire(move);
+
+        //screen shake
+        Camera.main.GetComponent<Animator>().Play("Camera_Shake");
+
     }
 
 
