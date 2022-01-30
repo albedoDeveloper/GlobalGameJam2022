@@ -126,12 +126,17 @@ public class PlayerMovement : NetworkBehaviour
     [Command(requiresAuthority = false)]
     void cmdFire()
     {
-
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         NetworkServer.Spawn(bullet);
 
         //projectile.firePoint = firePoint;
         //rpcFire(move);
+
+        //shake camera
+        //Camera.main.GetComponent<Animator>().SetBool("Shake", true);
+        Camera.main.GetComponent<Animator>().Play("Camera_Shake");
+
+
     }
 
 
