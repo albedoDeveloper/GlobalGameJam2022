@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 6342945595457360436}
   - component: {fileID: 6342945595457360427}
   - component: {fileID: 1818795343}
+  - component: {fileID: 1719313413}
   m_Layer: 6
   m_Name: PlayerCharacter
   m_TagString: Untagged
@@ -221,6 +222,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  animator: {fileID: 1719313413}
   targetVelocity: {x: 0, y: 0}
   playerGun: {fileID: 6342945595169549065}
   firePoint: {fileID: 511012931950584107}
@@ -230,6 +232,10 @@ MonoBehaviour:
   playerMaxSpeed: 30
   dog: {fileID: 1868135931, guid: ff5a5525086b05742bff3a0ad8b5d3ad, type: 3}
   cat: {fileID: -1668987857, guid: 77657ea3712207648938fc61e5d30dc2, type: 3}
+  p1move: {x: 0, y: 0, z: 0}
+  p2move: {x: 0, y: 0, z: 0}
+  p1shoot: 0
+  p2shoot: 0
 --- !u!114 &6342945595457360426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -363,3 +369,23 @@ MonoBehaviour:
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
   target: {fileID: 6342945595169549066}
+--- !u!95 &1719313413
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6342945595457360419}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cc1eddb683ce0694aa5813b3f37ffa1f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

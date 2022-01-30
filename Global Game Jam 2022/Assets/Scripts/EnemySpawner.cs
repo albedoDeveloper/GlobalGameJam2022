@@ -6,6 +6,7 @@ public class EnemySpawner : NetworkBehaviour
 {
 
     public GameObject enemyPrefab;
+    public Animator animator;
 
     public List<EnemyBehaviour> enemies = new List<EnemyBehaviour>();
     public float maxEnemies;
@@ -30,9 +31,14 @@ public class EnemySpawner : NetworkBehaviour
         if (countDownTimer > 0)
         {
             countDownTimer -= Time.deltaTime;
+            if (countDownTimer < 1)
+            {
+                animator.SetBool("Spawning", true);
+            }
         }
         else
         {
+            //animator.SetBool("Spawning", true);
             SpawnWave();
             countDownTimer = spawnInterval;
         }
@@ -49,7 +55,7 @@ public class EnemySpawner : NetworkBehaviour
             AddToList(newEnemy.GetComponent<EnemyBehaviour>());
             NetworkServer.Spawn(newEnemy);
         }
-
+        animator.SetBool("Spawning", false);
     }
 
     void AddToList(EnemyBehaviour enemy)

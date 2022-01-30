@@ -6,6 +6,7 @@ using Mirror;
 public class PlayerMovement : NetworkBehaviour
 {
     Rigidbody2D rb;
+    public Animator animator;
 
     public Vector2 targetVelocity;
     public GameObject playerGun;
@@ -59,6 +60,9 @@ public class PlayerMovement : NetworkBehaviour
 
         KeyPress();
 
+        animator.SetFloat("Speed", rb.velocity.magnitude);
+
+
     }
 
     private void KeyPress()
@@ -84,6 +88,7 @@ public class PlayerMovement : NetworkBehaviour
             //no drift requires higher accel value
             rb.velocity = targetVelocity * playerAccel;
         }
+
     }
 
     void Rotate()
@@ -125,5 +130,5 @@ public class PlayerMovement : NetworkBehaviour
     }
 
 
-    
+
 }
