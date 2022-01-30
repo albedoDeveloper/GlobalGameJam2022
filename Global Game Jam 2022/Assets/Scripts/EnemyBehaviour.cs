@@ -9,6 +9,9 @@ public class EnemyBehaviour : MonoBehaviour
     public GameObject playerTarget;
     public float detectionRadius = 25f;
     public float enemySpeed = 2f;
+
+    public float health = 5f;
+
     Rigidbody2D rb;
     List<Collider2D> hitColliders = new List<Collider2D>();
 
@@ -21,6 +24,12 @@ public class EnemyBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (health <= 0)
+        {
+            SelfDestruct();
+        }
+
         if (playerTarget)
         {
             SeekPlayer();
@@ -56,5 +65,15 @@ public class EnemyBehaviour : MonoBehaviour
     void SeekPlayer()
     {
         transform.position = Vector2.MoveTowards(transform.position, playerTarget.transform.position, enemySpeed * Time.deltaTime);
+    }
+
+    public void TakeDamage()
+    {
+        health--;
+    }
+
+    void SelfDestruct()
+    {
+        Destroy(this.gameObject, 0.25f);
     }
 }
