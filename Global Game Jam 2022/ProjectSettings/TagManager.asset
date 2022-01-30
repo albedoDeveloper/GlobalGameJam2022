@@ -6,6 +6,7 @@ TagManager:
   tags:
   - enemyred
   - enemyblue
+  - crystal
   layers:
   - Default
   - TransparentFX
