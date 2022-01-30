@@ -22,35 +22,53 @@ public class PlayerMovement : NetworkBehaviour
     public Sprite dog;
     public Sprite cat;
 
+    [SyncVar]
+    public Vector3 p1move;
+    
+    [SyncVar]
+    public Vector3 p2move;
 
+    [SyncVar]
+    public bool p1shoot;
 
+    [SyncVar]
+    public bool p2shoot;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
         if (!isClientOnly && hasAuthority)
         {
             GetComponent<SpriteRenderer>().sprite = dog;
         }
-        
-                else if (!isClientOnly && !hasAuthority)
-                {
-                    GetComponent<SpriteRenderer>().sprite = cat;
-                }
-                else if (isClientOnly && hasAuthority)
-                {
-                    GetComponent<SpriteRenderer>().sprite = cat;
-                }
-                else if (isClientOnly && !hasAuthority)
-                {
-                    GetComponent<SpriteRenderer>().sprite = dog;
-                }
+        else if (!isClientOnly && !hasAuthority)
+        {
+            GetComponent<SpriteRenderer>().sprite = cat;
+        }
+        else if (isClientOnly && hasAuthority)
+        {
+            GetComponent<SpriteRenderer>().sprite = cat;
+        }
+        else if (isClientOnly && !hasAuthority)
+        {
+            GetComponent<SpriteRenderer>().sprite = dog;
+        }
+
+        Camera.main.transform.parent = gameObject.transform;
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        if (isServer)
+            p1move = firePoint.position;
+
+        else if (isClientOnly)
+            p2move = firePoint.position;
+
         Rotate();
 
         KeyPress();
@@ -65,8 +83,8 @@ public class PlayerMovement : NetworkBehaviour
         Move();
 
         if (Input.GetMouseButtonDown(0))
-        {
-            Fire();
+        { 
+            cmdFire();
         }
     }
 
@@ -104,12 +122,27 @@ public class PlayerMovement : NetworkBehaviour
         playerGun.transform.right = Vector3.Lerp(playerGun.transform.right, mousePosition - transform.position, Time.deltaTime);
     }
 
-    void Fire()
+    [Command(requiresAuthority = false)]
+    void cmdFire()
     {
-        Debug.Log("Fire");
+        Vector3 move;
+
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Projectile projectile = bullet.GetComponent<Projectile>();
+        NetworkServer.Spawn(bullet);
+       
         //projectile.firePoint = firePoint;
-
+        //rpcFire(move);
     }
+
+    /*[ClientRpc]
+    void rpcFire(Vector3 move)
+    {
+        if (isClientOnly)
+        {
+            GameObject bullet = Instantiate(bulletPrefab, move, firePoint.rotation);
+            Projectile projectile = bullet.GetComponent<Projectile>();
+            //projectile.firePoint = firePoint;
+        }
+    }*/
 }
