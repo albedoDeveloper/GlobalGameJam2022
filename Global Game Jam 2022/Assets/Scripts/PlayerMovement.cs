@@ -9,6 +9,8 @@ public class PlayerMovement : NetworkBehaviour
 
     public Vector2 targetVelocity;
     public GameObject playerGun;
+    public Transform firePoint;
+    public GameObject bulletPrefab;
 
 
     Vector3 mousePosition;
@@ -17,31 +19,52 @@ public class PlayerMovement : NetworkBehaviour
     public float playerAccel;
     public float playerMaxSpeed;
 
+    public Sprite dog;
+    public Sprite cat;
 
+    [SyncVar]
+    public Vector3 p1move;
 
+    [SyncVar]
+    public Vector3 p2move;
 
+    [SyncVar]
+    public bool p1shoot;
+
+    [SyncVar]
+    public bool p2shoot;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
 
-        if (!isLocalPlayer)
-            return;
-        Camera.main.GetComponent<CameraStart>().SetChild(gameObject);
-
-        if (isServer)
+        if (!isClientOnly && hasAuthority)
         {
-            GetComponent<Renderer>().material.color = new Color(0, 255, 0);
+            GetComponent<SpriteRenderer>().sprite = dog;
+            Camera.main.transform.parent = gameObject.transform;
+        }
+        else if (!isClientOnly && !hasAuthority)
+        {
+            GetComponent<SpriteRenderer>().sprite = cat;
+        }
+        else if (isClientOnly && hasAuthority)
+        {
+            GetComponent<SpriteRenderer>().sprite = cat;
+            Camera.main.transform.parent = gameObject.transform;
+        }
+        else if (isClientOnly && !hasAuthority)
+        {
+            GetComponent<SpriteRenderer>().sprite = dog;
         }
 
-        else if (isClientOnly)
-            GetComponent<Renderer>().material.color = new Color(0, 0, 0);
+
     }
 
     // Update is called once per frame
     void Update()
     {
+
         Rotate();
 
         KeyPress();
@@ -54,6 +77,11 @@ public class PlayerMovement : NetworkBehaviour
         targetVelocity.x = (Input.GetAxis("Horizontal"));
 
         Move();
+
+        if (Input.GetMouseButtonDown(0) && hasAuthority)
+        {
+            cmdFire();
+        }
     }
 
     private void Move()
@@ -72,16 +100,12 @@ public class PlayerMovement : NetworkBehaviour
     {
         Camera.main.ResetWorldToCameraMatrix();
         //find mouse pos
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //Vector3 mousePosition = Camera.main.WorldToScreenPoint(Input.mousePosition);
-        //Vector3 mousePosition = Camera.main.ScreenToViewportPoint(Input.mousePosition);
-        //Vector3 mousePosition = Camera.main.WorldToViewportPoint(Input.mousePosition);
-        //Vector3 mousePosition = Camera.main.ViewportToWorldPoint(Input.mousePosition);
+        mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         mousePosition.z = 0;
 
         Debug.DrawLine(transform.position, mousePosition, Color.red);
-        Debug.Log("MouseX = " + mousePosition.x + " MouseY = " + mousePosition.y);
+        //Debug.Log("MouseX = " + mousePosition.x + " MouseY = " + mousePosition.y);
 
 
 
@@ -93,4 +117,18 @@ public class PlayerMovement : NetworkBehaviour
 
         playerGun.transform.right = Vector3.Lerp(playerGun.transform.right, mousePosition - transform.position, Time.deltaTime);
     }
+
+    [Command(requiresAuthority = false)]
+    void cmdFire()
+    {
+
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        NetworkServer.Spawn(bullet);
+
+        //projectile.firePoint = firePoint;
+        //rpcFire(move);
+    }
+
+
+    
 }
