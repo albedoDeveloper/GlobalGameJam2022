@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class EnemySpawner : MonoBehaviour
+using Mirror;
+public class EnemySpawner : NetworkBehaviour
 {
 
     public GameObject enemyPrefab;
@@ -38,6 +38,7 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
+    [Command(requiresAuthority = false)]
     void SpawnWave()
     {
         Debug.Log("SPawn all enemies");
@@ -46,7 +47,7 @@ public class EnemySpawner : MonoBehaviour
         {
             GameObject newEnemy = Instantiate(enemyPrefab, transform.position, Quaternion.identity);
             AddToList(newEnemy.GetComponent<EnemyBehaviour>());
-
+            NetworkServer.Spawn(newEnemy);
         }
 
     }

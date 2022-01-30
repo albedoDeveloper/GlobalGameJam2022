@@ -11,7 +11,7 @@ public class PlayerMovement : NetworkBehaviour
     public GameObject playerGun;
     public Transform firePoint;
     public GameObject bulletPrefab;
-
+    public GameObject bulletPrefab2;
 
     Vector3 mousePosition;
 
@@ -22,17 +22,7 @@ public class PlayerMovement : NetworkBehaviour
     public Sprite dog;
     public Sprite cat;
 
-    [SyncVar]
-    public Vector3 p1move;
-
-    [SyncVar]
-    public Vector3 p2move;
-
-    [SyncVar]
-    public bool p1shoot;
-
-    [SyncVar]
-    public bool p2shoot;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -107,8 +97,6 @@ public class PlayerMovement : NetworkBehaviour
         Debug.DrawLine(transform.position, mousePosition, Color.red);
         //Debug.Log("MouseX = " + mousePosition.x + " MouseY = " + mousePosition.y);
 
-
-
         //rotate
         Vector3 gunPos = playerGun.transform.position;
         gunPos.z = 0;
@@ -121,10 +109,17 @@ public class PlayerMovement : NetworkBehaviour
     [Command(requiresAuthority = false)]
     void cmdFire()
     {
+        if (hasAuthority)
+        {
+            GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+            NetworkServer.Spawn(bullet);
+        }
 
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-        NetworkServer.Spawn(bullet);
-
+        else
+        {
+            GameObject bullet = Instantiate(bulletPrefab2, firePoint.position, firePoint.rotation);
+            NetworkServer.Spawn(bullet);
+        }
         //projectile.firePoint = firePoint;
         //rpcFire(move);
     }
