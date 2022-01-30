@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class LampPlacer : MonoBehaviour
+public class LampPlacer : NetworkBehaviour
 {
     public GameObject _lampPrefab;
     public Camera _cam;
@@ -19,15 +19,30 @@ public class LampPlacer : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Instantiate(_lampPrefab,
-                _cam.ScreenToWorldPoint(
-                new Vector3(Input.mousePosition.x, Input.mousePosition.y, _cam.nearClipPlane)
-                 )
-                , Quaternion.identity);
+            CmdSpawnLampAll(Input.mousePosition.x, Input.mousePosition.y, _cam.nearClipPlane);
+
+            GameObject.Find("BuildController").GetComponent<BuildController>().ResetTimer();
+
+            NetworkServer.Destroy(gameObject);
         }
 
         transform.position = _cam.ScreenToWorldPoint(
             new Vector3(Input.mousePosition.x, Input.mousePosition.y, _cam.nearClipPlane)
+        );
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdSpawnLampAll(float x, float y, float z)
+    {
+        GameObject var = Instantiate(
+                _lampPrefab,
+                _cam.ScreenToWorldPoint(
+                new Vector3(x, y, z)
+                ),
+                Quaternion.identity
+            );
+        NetworkServer.Spawn(
+            var
         );
     }
 }

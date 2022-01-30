@@ -170,6 +170,7 @@ GameObject:
   - component: {fileID: 4057271042891466207}
   - component: {fileID: 1744277396198131974}
   - component: {fileID: 7266130905303223913}
+  - component: {fileID: -4423958457994612253}
   m_Layer: 6
   m_Name: LampPrefab
   m_TagString: Untagged
@@ -274,5 +275,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d26ea9f6e0c7adc438bf8e8cced6b70e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _lineRenderer: {fileID: 0}
   _circleCollider: {fileID: 94455322}
+--- !u!114 &-4423958457994612253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6542979668490829143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  visible: 0
+  m_AssetId: a2e499b8ec29ef0448d1b70f0bfe1f4c
+  hasSpawned: 0
