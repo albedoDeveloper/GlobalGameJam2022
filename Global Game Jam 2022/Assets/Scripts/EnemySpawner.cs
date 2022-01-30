@@ -6,6 +6,7 @@ public class EnemySpawner : MonoBehaviour
 {
 
     public GameObject enemyPrefab;
+    public Animator animator;
 
     public List<EnemyBehaviour> enemies = new List<EnemyBehaviour>();
     public float maxEnemies;
@@ -30,9 +31,14 @@ public class EnemySpawner : MonoBehaviour
         if (countDownTimer > 0)
         {
             countDownTimer -= Time.deltaTime;
+            if (countDownTimer < 1)
+            {
+                animator.SetBool("Spawning", true);
+            }
         }
         else
         {
+            //animator.SetBool("Spawning", true);
             SpawnWave();
             countDownTimer = spawnInterval;
         }
@@ -46,9 +52,8 @@ public class EnemySpawner : MonoBehaviour
         {
             GameObject newEnemy = Instantiate(enemyPrefab, transform.position, Quaternion.identity);
             AddToList(newEnemy.GetComponent<EnemyBehaviour>());
-
         }
-
+        animator.SetBool("Spawning", false);
     }
 
     void AddToList(EnemyBehaviour enemy)
